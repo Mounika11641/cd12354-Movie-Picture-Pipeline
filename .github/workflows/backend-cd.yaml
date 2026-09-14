@@ -135,6 +135,7 @@ jobs:
           sudo mv kustomize /usr/local/bin/
 
       - name: Deploy to EKS
+        working-directory: starter/backend/k8s
         run: |
           kustomize edit set image backend=${{ steps.login-ecr.outputs.registry }}/backend:${{ github.sha }}
           kustomize build | kubectl apply -f -
